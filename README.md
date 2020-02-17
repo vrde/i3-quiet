@@ -18,16 +18,51 @@ This is accomplished by two scripts, one to enable *quiet-mode*, and another one
 
 ## Install
 
-Make sure to install [`i3ipc-python`][3], then copy the two python scripts to your `.config/i3` directory, and configure `i3`. I use `mod+q` to move a window to the quiet workspace, and `mod+shift+q` to move it back to its original place. (I use `mod+Shift+backslash` to kill the focused window.)
-
-My configuration looks like this:
+Make sure to install [`i3ipc-python`][3], then copy the two python scripts to your `.config/i3` directory, and configure `i3`. I use `mod+q` to switch to the quiet workspace, and `mod+shift+q` to start the `quiet mode`, see the configuration below:
 
 ```
 # Quiet mode
-bindsym $mod+q exec $HOME/.config/i3/quiet-cmd.py
-bindsym $mod+Shift+q exec $HOME/.config/i3/quiet-cmd.py toggle
+
+mode "quiet" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Move a window in and out the quiet mode
+        bindsym q exec ~/.config/i3/quiet-cmd.py toggle
+
+        # Resize the window in quiet mode
+        bindsym s exec ~/.config/i3/quiet-cmd.py resize small
+        bindsym m exec ~/.config/i3/quiet-cmd.py resize medium
+        bindsym l exec ~/.config/i3/quiet-cmd.py resize large
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Caps_Lock mode "default"
+        bindsym $mod+d mode "default"
+}
+
+bindsym $mod+q exec $HOME/.config/i3/quiet-cmd.py switch
+bindsym $mod+Shift+q mode "quiet"
 exec_always $HOME/.config/i3/quiet-toggle-bar.py
 ```
+
+You can also play with the script from the CLI:
+
+```
+➜  i3-quiet git:(improve-cli) ✗ ./quiet-cmd.py -h
+usage: quiet-cmd.py [-h] {toggle,switch,resize} ...
+
+Control i3-quiet.
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+subcommands:
+  valid subcommands
+
+  {toggle,switch,resize}
+                        additional help
+```
+
 
 [1]: https://i3wm.org/docs/userguide.html#_toggling_fullscreen_mode_for_a_window
 [2]: https://github.com/polybar/polybar/
