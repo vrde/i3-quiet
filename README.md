@@ -27,23 +27,24 @@ mode "quiet" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Move a window in and out the quiet mode
-        bindsym q exec ~/.config/i3/quiet-cmd.py toggle
+        bindsym q exec ~/.config/i3/quiet-cmd.py toggle ; mode "default"
 
         # Resize the window in quiet mode
         bindsym s exec ~/.config/i3/quiet-cmd.py resize small
         bindsym m exec ~/.config/i3/quiet-cmd.py resize medium
         bindsym l exec ~/.config/i3/quiet-cmd.py resize large
 
-        # back to normal: Enter or Escape or $mod+r
+        # back to normal
+        bindsym Escape mode "default"
         bindsym Return mode "default"
         bindsym Caps_Lock mode "default"
         bindsym $mod+d mode "default"
 }
+```
 
 bindsym $mod+q exec $HOME/.config/i3/quiet-cmd.py switch
 bindsym $mod+Shift+q mode "quiet"
 exec_always $HOME/.config/i3/quiet-toggle-bar.py
-```
 
 You can also play with the script from the CLI:
 
