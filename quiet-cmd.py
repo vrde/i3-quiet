@@ -14,22 +14,21 @@ WIDTH_PERC=50
 MAX_WIDTH=800
 HEIGHT_PERC=90
 MAX_HEIGHT=1024
-
 SIZES = {
     'small': [50, 70, 800, 800],
     'medium': [65, 80, 1024, 1024],
     'large': [90, 90, 1600, 1600],
 }
-
+DEFAULT_SIZE = 'medium'
 ZEN_BORDER = 'none'
 DEFAULT_BORDER = 'normal'
-
 ZEN_FILE_PATH = os.path.join(os.environ['HOME'], '.config/i3/.i3-quiet.json')
 
 
 def enable_zen_mode(workspace):
-    width = round(min(workspace['rect']['width'] * WIDTH_PERC / 100, MAX_WIDTH))
-    height = round(min(workspace['rect']['height'] * HEIGHT_PERC / 100, MAX_HEIGHT))
+    wp, hp, wm, hm = SIZES[DEFAULT_SIZE]
+    width = round(min(workspace['rect']['width'] * wp / 100, wm))
+    height = round(min(workspace['rect']['height'] * hp / 100, hm))
     msg = ';'.join([
         'move container to workspace {}'.format(ZEN_WORKSPACE),
         'workspace {}'.format(ZEN_WORKSPACE),
