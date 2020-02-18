@@ -40,11 +40,11 @@ mode "quiet" {
         bindsym Caps_Lock mode "default"
         bindsym $mod+d mode "default"
 }
-```
 
 bindsym $mod+q exec $HOME/.config/i3/quiet-cmd.py switch
 bindsym $mod+Shift+q mode "quiet"
-exec_always $HOME/.config/i3/quiet-toggle-bar.py
+exec_always $HOME/.config/i3/quiet-toggle-bar.py --kill
+```
 
 You can also play with the script from the CLI:
 
